@@ -1,0 +1,25 @@
+.custom-navbar {
+  background-color: #81cbee !important; /* orange */
+}
+.ms{
+    margin-right: auto;
+}
+.navbar .nav-link{margin-left:20px;
+    margin-right:10px;
+
+color: rgb(255, 255, 255); /* Change text color */
+font-family: 'Poppins', sans-serif; /* Change font */
+font-size: 16px;
+font-weight: bold; /* Optional: adjust font size */
+}
+.navbar .nav-link:hover{margin-left:20px;
+color: #718188 !important; /* Change text color */
+font-family: 'Poppins', sans-serif; /* Change font */
+font-size: 16px;
+font-weight: bold; /* Optional: adjust font size */
+}
+
+html, body {
+  margin: 0; /* Remove default spacing */
+  padding: 0;
+}
