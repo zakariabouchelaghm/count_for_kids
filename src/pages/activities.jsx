@@ -1,5 +1,5 @@
 import React,{ useRef, useEffect } from "react";
-import CameraComponent  from "../components/cameracomponent";
+import Canvascomponent  from "../components/canvascomponent";
 
 
 function Activities() {
@@ -7,7 +7,8 @@ function Activities() {
     return(
       <div>
       <h1>الأنشطة</h1>
-      <CameraComponent />
+     <Canvascomponent />
+
     </div>
     )
 }

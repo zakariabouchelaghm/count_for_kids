@@ -1,4 +1,4 @@
-{ "homepage": "https://zakariabouchelaghm.github.io/count_for_kids",
+{ 
   "name": "count_for_kids_reactjs",
   "private": true,
   "version": "0.0.0",
@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
     "@mediapipe/camera_utils": "^0.3.1675466862",
