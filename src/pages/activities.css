@@ -1,0 +1,9 @@
+.activities {
+    display: flex;
+  flex-direction: column;   /* stack h1 and canvas vertically */
+  justify-content: center;  /* center vertically */
+  align-items: center;      /* center horizontally */
+  height: 100vh;            /* take full viewport height */
+  text-align: center; 
+}
+

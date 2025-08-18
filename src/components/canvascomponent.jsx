@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-
+import "../pages/activities.css";
 
 export default function CameraComponent() {
   const canvasRef = useRef(null);
@@ -45,22 +45,17 @@ export default function CameraComponent() {
     ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
   };
 
-  const save = () => {
+  const check = async() => {
     const canvas = canvasRef.current;
-    const link = document.createElement("a");
-    link.download = `drawing-${Date.now()}.jpeg`;
-
-    // Force white background for JPEG
-    const tempCanvas = document.createElement("canvas");
-    tempCanvas.width = canvas.width;
-    tempCanvas.height = canvas.height;
-    const ctx = tempCanvas.getContext("2d");
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-    ctx.drawImage(canvas, 0, 0);
-    link.href = tempCanvas.toDataURL("image/jpeg");
-
-    link.click();
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg"));
+    const formData = new FormData();
+    formData.append("file", blob, "drawing.jpeg");
+    const response = await fetch("https://app-deploy-1.onrender.com/predict", {
+    method: "POST",
+    body: formData,
+    });
+    const result = await response.json();
+    console.log("Predicted:", result.predicted_class);
   };
 
   // Mouse handlers
@@ -105,8 +100,8 @@ export default function CameraComponent() {
         onTouchEnd={stop}
       />
       <div className="mt-2 flex gap-2">
-        <button onClick={clear} className="px-3 py-1 border rounded">Clear</button>
-        <button onClick={save} className="px-3 py-1 border rounded">Save JPEG</button>
+        <button onClick={clear} className="px-3 py-1 border rounded">مسح</button>
+        <button onClick={check} className="px-3 py-1 border rounded">تحقق</button>
       </div>
     </div>
   );

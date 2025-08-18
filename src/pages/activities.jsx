@@ -5,10 +5,9 @@ import Canvascomponent  from "../components/canvascomponent";
 function Activities() {
 
     return(
-      <div>
+      <div className="activities">
       <h1>الأنشطة</h1>
      <Canvascomponent />
-
     </div>
     )
 }
