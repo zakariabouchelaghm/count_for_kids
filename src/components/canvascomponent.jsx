@@ -62,6 +62,7 @@ export default function CameraComponent() {
     setRound(0);
     setResults([]);
     playsound(seq[0]);
+    setCurrentSound(seq[0]);
     clear();
   }  
   const playsound=(digit)=>{  
@@ -104,7 +105,7 @@ export default function CameraComponent() {
     });
     const result = await response.json();
     const predicted = result.predicted_class;
-    console.log(predicted);
+    
     setLabel(predicted);
     console.log(predicted);
     if (predicted==currentSound){
