@@ -1,9 +1,14 @@
 .activities {
-    display: flex;
+  display: flex;
   flex-direction: column;   /* stack h1 and canvas vertically */
-  justify-content: center;  /* center vertically */
+  justify-content: flex-start;  /* center vertically */
   align-items: center;      /* center horizontally */
   height: 100vh;            /* take full viewport height */
   text-align: center; 
+  padding-top: 20px; 
 }
 
+canvas {
+  touch-action: none;   /* Prevent scrolling/pinch zoom */
+  -ms-touch-action: none;
+}
