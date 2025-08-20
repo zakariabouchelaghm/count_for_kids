@@ -6,7 +6,8 @@ import './App.css'
 import NavbarComponent  from './navbar'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import About  from "./pages/about"; 
-import Activities from "./pages/activities";
+import Numbers from "./pages/activities/numbers";
+import Alphabet from "./pages/activities/alphabet";
 import Home from "./pages/home";
 function App() {
   
@@ -17,8 +18,8 @@ function App() {
     <Routes>
       <Route path="/pages/home" element={<Home/>} />
       <Route path="/pages/about" element={<About />} />
-      <Route path="/pages/activities" element={<Activities />} />
-      
+      <Route path="/pages/activities/numbers" element={<Numbers />} />
+      <Route path="/pages/activities/alphabet" element={<Alphabet />} />
     </Routes>
     </div>
     </>

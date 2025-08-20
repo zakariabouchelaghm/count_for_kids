@@ -23,3 +23,18 @@ html, body {
   margin: 0; /* Remove default spacing */
   padding: 0;
 }
+
+.dropdown-menu {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl-dropdown .dropdown-item {
+  text-align: right;
+}
+
+/* If the menu still anchors on the left due to other CSS, force it: */
+.rtl-dropdown .dropdown-menu {
+  left: auto !important;
+  right: 0 !important;
+}

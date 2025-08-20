@@ -1,16 +1,15 @@
 import React,{ useRef, useEffect } from "react";
-import Canvascomponent  from "../components/canvascomponent";
+import Canvascomponent  from "../../components/canvascomponent";
+import "./numbers.css";
 
-
-function Activities() {
+function Numbers() {
 
     return(
       <div className="activities">
       
-      <h1>الأنشطة</h1>
       <h2>اسمع وحاول كتابة الرقم </h2>
      <Canvascomponent />
     </div>
     )
 }
-export default Activities;
+export default Numbers;

@@ -9,7 +9,7 @@ export default function CameraComponent() {
   const [sequence, setSequence] = useState([]);
   const [results, setResults] = useState([]);
   const [currentSound, setCurrentSound] = useState(null);
-  const totalRounds = 7;
+  const totalRounds = 10;
   // Ensure background is white on first render
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -51,24 +51,56 @@ export default function CameraComponent() {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
   };
+
+  const arabicMap = {
+  1: "ا", // Alif
+  2: "ب", // Ba
+  3: "ت", // Ta
+  4: "ث", // Tha
+  5: "ج", // Jim
+  6: "ح", // Ha
+  7: "خ", // Kha
+  8: "د", // Dal
+  9: "ذ", // Dhal
+  10: "ر", // Ra
+  11: "ز", // Zay
+  12: "س", // Sin
+  13: "ش", // Shin
+  14: "ص", // Sad
+  15: "ض", // Dad
+  16: "ط", // Ta
+  17: "ظ", // Dha
+  18: "ع", // Ain
+  19: "غ", // Ghayn
+  20: "ف", // Fa
+  21: "ق", // Qaf
+  22: "ك", // Kaf
+  23: "ل", // Lam
+  24: "م", // Meem
+  25: "ن", // Noon
+  26: "ه", // Ha
+  27: "و", // Waw
+  28: "ي"  // Ya
+};
   const startquiz = () =>{
     if (canvasRef.current) {
     const ctx = canvasRef.current.getContext("2d");
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
   }
-    const seq=Array.from({length:totalRounds},()=>Math.floor(Math.random() * 9)+1);
+    const seq=Array.from({length:totalRounds},()=>Math.floor(Math.random() * 28)+1);
     setSequence(seq);
     setRound(0);
     setResults([]);
-    playsound(seq[0]);
-    setCurrentSound(seq[0]);
+    /*playsound(seq[0]);*/
+    setCurrentSound(arabicMap[seq[0]]);
     clear();
   }  
+  /*
   const playsound=(digit)=>{  
     const audio = new Audio(`/count_for_kids/sounds/${digit}.wav`);
     audio.play();
-  }
+  }*/
   const correct=()=>{
     const audio = new Audio(`/count_for_kids/sounds/correct.wav`);
     audio.play();
@@ -95,31 +127,37 @@ export default function CameraComponent() {
   // Draw original canvas on top
     ctx.drawImage(canvas, 0, 0);
     ctx.closePath();
-    const blob = await new Promise((resolve) => tempCanvas.toBlob(resolve, "image/jpeg", 1));
-    
+    const blob = await new Promise((resolve) => tempCanvas.toBlob(resolve, "image/png", 1));
+
+
     const formData = new FormData();
     formData.append("file", blob, "drawing.jpeg");
-    const response = await fetch("https://app-deploy-1.onrender.com/predict", {
+    const response = await fetch("https://app-deploy-letter.onrender.com/predict", {
     method: "POST",
     body: formData,
     });
     const result = await response.json();
     const predicted = result.predicted_class;
     
-    setLabel(predicted);
-    console.log(predicted);
-    if (predicted==currentSound){
+    setLabel(predicted+1);
+    const correctLetter = currentSound;
+    if (arabicMap[predicted+1]==correctLetter){
       correct();
+      console.log(currentSound);
+      console.log(predicted+1, arabicMap[predicted+1]);
     }else{
       incorrect();
+      console.log(currentSound);
+      console.log(predicted+1, arabicMap[predicted+1]);
     }
     
     if (round + 1 < totalRounds) {
        const nextRound = round + 1;
         setRound(nextRound);
-        const nextSound = sequence[nextRound];
+        const nextSound = arabicMap[sequence[nextRound]];
         setCurrentSound(nextSound);
-        playsound(nextSound);
+        
+        //playsound(nextSound);
         clear();
       } else {
         
@@ -160,6 +198,7 @@ export default function CameraComponent() {
         <button onClick={startquiz} className="px-4 py-2 border rounded">ابدأ التمرين</button>
       ) : (
         <>
+          <h1>{currentSound}</h1>
           <canvas
             ref={canvasRef}
             width={300}
@@ -176,7 +215,7 @@ export default function CameraComponent() {
           <div className="mt-2 flex gap-2 items-center">
             <button onClick={clear} className="px-3 py-1 border rounded">مسح</button>
             <button onClick={check} className="px-3 py-1 border rounded">تحقق</button>
-            {label !== null && <h2>النتيجة: {label}</h2>}
+            {arabicMap[label] !== null && <h2>النتيجة: {arabicMap[label]}</h2>}
           </div>
 
         
