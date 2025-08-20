@@ -92,15 +92,15 @@ export default function CameraComponent() {
     setSequence(seq);
     setRound(0);
     setResults([]);
-    /*playsound(seq[0]);*/
+    playsound(arabicMap[seq[0]]);
     setCurrentSound(arabicMap[seq[0]]);
     clear();
   }  
-  /*
+  
   const playsound=(digit)=>{  
     const audio = new Audio(`/count_for_kids/sounds/${digit}.wav`);
     audio.play();
-  }*/
+  }
   const correct=()=>{
     const audio = new Audio(`/count_for_kids/sounds/correct.wav`);
     audio.play();
@@ -157,7 +157,7 @@ export default function CameraComponent() {
         const nextSound = arabicMap[sequence[nextRound]];
         setCurrentSound(nextSound);
         
-        //playsound(nextSound);
+        playsound(nextSound);
         clear();
       } else {
         
@@ -198,7 +198,6 @@ export default function CameraComponent() {
         <button onClick={startquiz} className="px-4 py-2 border rounded">ابدأ التمرين</button>
       ) : (
         <>
-          <h1>{currentSound}</h1>
           <canvas
             ref={canvasRef}
             width={300}
